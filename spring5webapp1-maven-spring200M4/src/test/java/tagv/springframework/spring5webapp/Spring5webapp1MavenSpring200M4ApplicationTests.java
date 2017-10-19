@@ -1,4 +1,4 @@
-package tagv.springframework.spring5webapp1mavenspring200M4;
+package tagv.springframework.spring5webapp;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
