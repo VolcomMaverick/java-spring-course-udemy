@@ -15,25 +15,29 @@ public class Book {
     private Long id;
     private String title;
     private String isbn;
-    private String publisher;
+//    private String publisher;
 
     @ManyToMany
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author.id"))
     private Set<Author> authors = new HashSet<>();
 
+    @OneToOne
+    @JoinTable(name = "book_publisher", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "publisher.id"))
+    private Set<Publisher> publishers = new HashSet<>();
+
     public Book() {
     }
 
-    public Book(String title, String isbn, String publisher) {
+    public Book(String title, String isbn/*, String publisher*/) {
         this.title = title;
         this.isbn = isbn;
-        this.publisher = publisher;
+//        this.publisher = publisher;
     }
 
-    public Book(String title, String isbn, String publisher, Set<Author> authors) {
+    public Book(String title, String isbn/*, String publisher*/, Set<Author> authors) {
         this.title = title;
         this.isbn = isbn;
-        this.publisher = publisher;
+//        this.publisher = publisher;
         this.authors = authors;
     }
 
@@ -61,13 +65,13 @@ public class Book {
         this.isbn = isbn;
     }
 
-    public String getPublisher() {
-        return publisher;
-    }
+//    public String getPublisher() {
+//        return publisher;
+//    }
 
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
-    }
+//    public void setPublisher(String publisher) {
+//        this.publisher = publisher;
+//    }
 
     public Set<Author> getAuthors() {
         return authors;
@@ -76,6 +80,10 @@ public class Book {
     public void setAuthors(Set<Author> authors) {
         this.authors = authors;
     }
+
+    public Set<Publisher> getPublishers() { return publishers; }
+
+    public void setPublishers(Set<Publisher> publishers) { this.publishers = publishers; }
 
     @Override
     public boolean equals(Object o) {
@@ -98,8 +106,9 @@ public class Book {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", isbn='" + isbn + '\'' +
-                ", publisher='" + publisher + '\'' +
+//                ", publisher='" + publisher + '\'' +
                 ", authors=" + authors +
+                ", publishers=" + publishers +
                 '}';
     }
 }
