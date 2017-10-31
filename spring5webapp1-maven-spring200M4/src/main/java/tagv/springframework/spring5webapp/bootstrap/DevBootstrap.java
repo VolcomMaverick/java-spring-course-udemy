@@ -3,10 +3,7 @@ package tagv.springframework.spring5webapp.bootstrap;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
-import tagv.springframework.spring5webapp.model.Author;
-import tagv.springframework.spring5webapp.model.Book;
-import tagv.springframework.spring5webapp.model.Publisher;
-import tagv.springframework.spring5webapp.model.Qublisher;
+import tagv.springframework.spring5webapp.model.*;
 import tagv.springframework.spring5webapp.repositories.AuthorRepository;
 import tagv.springframework.spring5webapp.repositories.BookRepository;
 import tagv.springframework.spring5webapp.repositories.PublisherRepository;
@@ -40,6 +37,8 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         //Eric
         Author eric = new Author("Eric", "Evans");
 //        Publisher jdk = new Publisher("John Deere K", "Merlin Avenue 10");
+        Publication firstPublication = new Publication("New York", "12/22/1987");
+        Publication secondPublication = new Publication("New Orleans", "12/22/1989");
 
         Publisher jdk = new Publisher();
         jdk.setName("John Deere K");
@@ -53,7 +52,11 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
         Book ddd = new Book("Domain Driven Design", "1234", jdk, qdk1);
         eric.getBooks().add(ddd);
+        firstPublication.getBooks().add(ddd);
+        secondPublication.getBooks().add(ddd);
         ddd.getAuthors().add(eric);
+        ddd.getPublications().add(firstPublication);
+        ddd.getPublications().add(secondPublication);
 
         authorRepository.save(eric);
         bookRepository.save(ddd);
@@ -68,8 +71,9 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
         Book noEJB = new Book("J2EE Development without EJB", "23444", jdl,qdk2);
         rod.getBooks().add(noEJB);
+        secondPublication.getBooks().add(noEJB);
         noEJB.getAuthors().add(rod);
-//        jdl.getPublishers().add(jdl);
+        noEJB.getPublications().add(secondPublication);
 
         authorRepository.save(rod);
         bookRepository.save(noEJB);

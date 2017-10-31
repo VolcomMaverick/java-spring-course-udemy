@@ -26,7 +26,17 @@ public class Book {
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author.id"))
     private Set<Author> authors = new HashSet<>();
 
+    @ManyToMany
+    @JoinTable(name = "publication_book", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "publication.id"))
+    private Set<Publication> publications = new HashSet<>();
+
     public Book() {
+    }
+
+    public Book(String title, String isbn, Publisher publisher) {
+        this.title = title;
+        this.isbn = isbn;
+        this.publisher = publisher;
     }
 
     public Book(String title, String isbn, Publisher publisher, Qublisher qublisher) {
@@ -84,7 +94,11 @@ public class Book {
         this.authors = authors;
     }
 
-//    public Set<Publisher> getPublishers() { return publishers; }
+    public Set<Publication> getPublications() { return publications; }
+
+    public void setPublications(Set<Publication> publications) { this.publications = publications; }
+
+    //    public Set<Publisher> getPublishers() { return publishers; }
 //
 //    public void setPublishers(Set<Publisher> publishers) { this.publishers = publishers; }
 
@@ -112,7 +126,7 @@ public class Book {
                 ", publisher='" + publisher + '\'' +
                 ", qublisher='" + qublisher + '\'' +
                 ", authors=" + authors +
-//                ", publishers=" + publishers +
+                ", publications=" + publications +
                 '}';
     }
 }
