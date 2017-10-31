@@ -19,6 +19,9 @@ public class Book {
     @OneToOne
     private Publisher publisher;
 
+    @OneToOne
+    private Qublisher qublisher;
+
     @ManyToMany
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "author.id"))
     private Set<Author> authors = new HashSet<>();
@@ -26,16 +29,18 @@ public class Book {
     public Book() {
     }
 
-    public Book(String title, String isbn, Publisher publisher) {
+    public Book(String title, String isbn, Publisher publisher, Qublisher qublisher) {
         this.title = title;
         this.isbn = isbn;
         this.publisher = publisher;
+        this.qublisher = qublisher;
     }
 
-    public Book(String title, String isbn, Publisher publisher, Set<Author> authors) {
+    public Book(String title, String isbn, Publisher publisher, Qublisher qublisher, Set<Author> authors) {
         this.title = title;
         this.isbn = isbn;
         this.publisher = publisher;
+        this.qublisher = qublisher;
         this.authors = authors;
     }
 
@@ -105,6 +110,7 @@ public class Book {
                 ", title='" + title + '\'' +
                 ", isbn='" + isbn + '\'' +
                 ", publisher='" + publisher + '\'' +
+                ", qublisher='" + qublisher + '\'' +
                 ", authors=" + authors +
 //                ", publishers=" + publishers +
                 '}';
